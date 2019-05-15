@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import FormData from 'form-data'
 
 class AddProduct extends Component {
     constructor(props) {
@@ -8,9 +9,10 @@ class AddProduct extends Component {
             name : '',
             img : [],
             des : '',
-            price : undefined,
+            price : 0,
             cate : '',
-            quantity : undefined
+            quantity : 0,
+            message : undefined
         }
     }
     isChange = (e) => {
@@ -28,16 +30,24 @@ class AddProduct extends Component {
 
     submit = (e) => {
         e.preventDefault();
-        Axios.post('http://localhost:3000/admin/products', {
-            name : this.state.name,
-            img : this.state.img,
-            des : this.state.des,
-            price : this.state.price,
-            cate : this.state.cate,
-            quantity : this.state.quantity
-        })
+        var data = new FormData();
+        // , this.state.img.name
+        data.append('img', this.state.img);
+        data.append('name', this.state.name);
+        data.append('des', this.state.des);
+        data.append('price', this.state.price);
+        data.append('cate', this.state.cate);
+        data.append('quantity', this.state.quantity);
+
+        Axios.post('http://localhost:3000/admin/products', data)
         .then(res => {
             console.log(res.data);
+            window.location.reload();
+            return this.setState({message: 
+                <div class="alert alert-success" role="alert">
+                    Them product thanh cong
+                </div>
+            })
         })
         .catch(err => {
             console.log(err);
@@ -50,6 +60,7 @@ class AddProduct extends Component {
         return (
             <div className="row">
                 <form className="col-md-12 col-sm-6" >
+                    {this.state.message}
                     <div className="form-group">
                         <label > Name</label>
                         <input onChange={(e) => this.isChange(e)} name ="name" type="text" className="form-control" placeholder="Enter Name " />
