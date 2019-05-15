@@ -9,13 +9,10 @@ class Nav extends Component {
           <li className="nav-item">
             <Link className="nav-link active" to="/addProduct">Thêm Product</Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link active" to="/addCates">Thêm Category</Link>
+          </li>
           {/* <li className="nav-item">
-            <a className="nav-link" href="#">Link</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Link</a>
-          </li>
-          <li className="nav-item">
             <a className="nav-link disabled" href="#" tabIndex={-1} aria-disabled="true">Disabled</a>
           </li> */}
       </ul>

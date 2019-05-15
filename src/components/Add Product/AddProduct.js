@@ -39,7 +39,7 @@ class AddProduct extends Component {
         data.append('cate', this.state.cate);
         data.append('quantity', this.state.quantity);
 
-        Axios.post('http://localhost:3000/admin/products', data)
+        Axios.post('http://localhost:3000/admin/product', data)
         .then(res => {
             console.log(res.data);
             window.location.reload();
@@ -55,8 +55,6 @@ class AddProduct extends Component {
     }
 
     render() {
-
-        console.log(this.state);
         return (
             <div className="row">
                 <form className="col-md-12 col-sm-6" >
