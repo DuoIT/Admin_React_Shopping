@@ -80,7 +80,6 @@ class Product extends Component {
         .then(doc => {            
             return this.setState({
                 products : doc.data.products,
-                // filterProduct : doc.data.products,
                 cates: doc.data.cates
             })
         })
