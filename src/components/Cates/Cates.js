@@ -75,7 +75,6 @@ class Cates extends Component {
         super(props);
         this.state = {
             cates : [],
-            products : [],
             cateId: '',
             filter : '',
             name: ''
@@ -108,7 +107,8 @@ class Cates extends Component {
     }
     cancel = (e) => {
         return this.setState({
-            name : ''
+            name : '',
+            cateId : ''
         });
     }
     getCatesAndProduct = () => {
@@ -166,7 +166,18 @@ class Cates extends Component {
         })
     }
 
+    
+
     render() {
+        var idCate = undefined;
+        if(this.state.cateId !== '') {
+            idCate = <div>
+                <p><strong>Đang chỉnh sửa</strong></p>
+                <footer>Id: #<cite title="Source Title">{this.state.cateId}</cite></footer>
+            </div>
+        } else {
+            idCate = <p><strong>Tạo mới Category</strong></p>
+        }
         
         return (
             <div className="content-page">
@@ -183,17 +194,26 @@ class Cates extends Component {
                             </p>
                             <div className="row">
                             <div className="col-12">
-                                <div className="p-20">
-                                <form className="form-horizontal" role="form">
-                                    <div className="form-group row">
-                                        <label className="col-2 col-form-label">Tên loại</label>
-                                        <div className="col-10">
-                                            <input value={this.state.name} onChange={(e) => this.isChange(e)} type="text" name="name" className="form-control" placeholder="Nhập tên loại..." />
+                                <div className="col-md-4">
+                                    <div className="card m-b-20 text-white bg-pink text-xs-center">
+                                        <div className="card-body">
+                                        <blockquote className="card-bodyquote">
+                                            {idCate}
+                                        </blockquote>
                                         </div>
-                                    </div>                                    
-                                    <button onClick={(e) => this.submit(e)} className="btn btn-primary btn-rounded w-md waves-effect waves-light m-b-5" type="button">Save</button>                                 
-                                    <button style={{marginLeft: '10px'}} onClick={(e) => this.cancel(e)} className="btn btn-danger btn-rounded w-md waves-effect waves-light m-b-5" type="button">Cancel</button>                                 
-                                </form>
+                                    </div>
+                                </div>
+                                <div className="p-20">
+                                    <form className="form-horizontal" role="form">
+                                        <div className="form-group row">
+                                            <label className="col-2 col-form-label">Tên loại</label>
+                                            <div className="col-10">
+                                                <input value={this.state.name} onChange={(e) => this.isChange(e)} type="text" name="name" className="form-control" placeholder="Nhập tên loại..." />
+                                            </div>
+                                        </div>                                    
+                                        <button onClick={(e) => this.submit(e)} className="btn btn-primary btn-rounded w-md waves-effect waves-light m-b-5" type="button">Save</button>                                 
+                                        <button style={{marginLeft: '10px'}} onClick={(e) => this.cancel(e)} className="btn btn-danger btn-rounded w-md waves-effect waves-light m-b-5" type="button">Cancel</button>                                 
+                                    </form>
                                 </div>
                             </div>
                             </div>

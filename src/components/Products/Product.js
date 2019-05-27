@@ -70,9 +70,10 @@ class Product extends Component {
             name : '',
             img : [],
             des : '',
-            price : 0,
+            price : '',
             cate : '',
-            quantity : 0,
+            quantity : '',
+            productId: ''
         });
     }
     getCatesAndProduct = () => {
@@ -145,7 +146,7 @@ class Product extends Component {
             return this.getCatesAndProduct();
         })
         .catch(err => {
-            console.log(err.response.data);
+            console.log(err);
         })
     }
 
@@ -184,6 +185,14 @@ class Product extends Component {
         } else {
             imageProduct = <img style={{maxWidth: '100px', height: '100px'}} src="assets/images/add-product-icon.png" className="img-responsive rounded-circle" alt="user" />
         }
+        var idProduct = <p><strong>Tạo mới Product</strong></p>
+        if(this.state.productId !== '') {
+            idProduct = <div>
+                <p><strong>Đang chỉnh sửa</strong></p>
+                <footer>Id: #<cite title="Source Title">{this.state.productId}</cite></footer>
+            </div>
+        }
+
         return (
             <div className="content-page">
             <ToastContainer autoClose={2000} /> 
@@ -199,6 +208,16 @@ class Product extends Component {
                             </p>
                             <div className="row">
                             <div className="col-12">
+                                <div className="col-md-4">
+                                    <div className="card m-b-20 text-white bg-pink text-xs-center">
+                                        <div className="card-body">
+                                        <blockquote className="card-bodyquote">
+                                            {idProduct}
+                                        </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div className="p-20">
                                 <form className="form-horizontal" role="form">
                                     <div className="form-group row">
